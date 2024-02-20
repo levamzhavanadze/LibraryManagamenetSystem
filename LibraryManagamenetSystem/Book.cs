@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LibraryManagamenetSystem
+﻿namespace LibraryManagamenetSystem
 {
     internal class Book
     {
-        static int Id {  get; set; }
+        static int Id { get; set; }
 
-        public string Title { get; set; } 
+        public string Title { get; set; }
 
         public string Author { get; set; }
 
@@ -20,9 +13,9 @@ namespace LibraryManagamenetSystem
 
         public Book()
         {
-            
+
             Id = GenerateId();
-            
+
         }
 
         internal int GenerateId()
@@ -34,7 +27,7 @@ namespace LibraryManagamenetSystem
 
             return tempId;
         }
-        
+
 
         public override string ToString()
         {
