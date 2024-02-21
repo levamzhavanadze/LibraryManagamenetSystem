@@ -1,35 +1,37 @@
-﻿namespace LibraryManagemenetSystem
+﻿namespace LibraryManagementSystem
 {
     internal class Book
     {
-        public int Id { get; set; }
+        private int Id { get; set; }
         //helper Id to generate incremental ID
-        static int tempId;
-        public string Title { get; set; }
+        private static int tempId;
+        private string Title { get; set; }
 
-        public string Author { get; set; }
+        private string Author { get; set; }
 
-        public DateTime PublishingYear { get; set; }
+        private DateTime PublishingYear { get; set; }
 
 
         public Book(string title, string author, int publishingYear)
         {
 
-            Id = GenerateId();
+            Id = GenerateId;
             Title = title;
             Author = author;
             PublishingYear = new DateTime(publishingYear, 1, 1);
-
         }
 
         /// <summary>
         /// Generates incremental Id for each instance of the book
         /// </summary>
         /// <returns>tempId</returns>
-        internal int GenerateId()
+        static int GenerateId
         {
-            tempId++;
-            return tempId;
+            get
+            {
+                tempId++;
+                return tempId;
+            }
         }
 
         /// <summary>
@@ -38,6 +40,15 @@
         public void BookDetails()
         {
             Console.WriteLine(ToString());
+        }
+
+        /// <summary>
+        /// Returns the book title
+        /// </summary>
+        /// <returns>Title</returns>
+        public string BookTitle()
+        {
+            return Title;
         }
 
         public override string ToString()

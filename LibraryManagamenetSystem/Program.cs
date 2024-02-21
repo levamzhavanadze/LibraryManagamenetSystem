@@ -1,4 +1,4 @@
-﻿using LibraryManagemenetSystem;
+﻿using LibraryManagementSystem;
 
 
 
@@ -11,5 +11,3 @@ Console.WriteLine("Hello, here you can manage books. Here are the options you ca
 
 //Open Menu
 userInteractive.Menu();
-
-

@@ -1,9 +1,11 @@
-﻿namespace LibraryManagemenetSystem
+﻿using System.Collections;
+
+namespace LibraryManagementSystem
 {
     /// <summary>
     /// This class is responsible to manage books 
     /// </summary>
-    internal class BookManager
+    internal class BookManager : IEnumerable
     {
         readonly List<Book> books = [];
 
@@ -36,11 +38,12 @@
         public void SearchBookByTitle(string title)
         {
             //checks if there is no books in the list prints corresponding message
-            if (books.Count() != 0)
+            if (books.Count != 0)
             {
                 //generate temp list matched with passed title
                 var booksFilteredByTitle = from b in books
-                                           where b.Title.ToLower() == title
+                                               //where b.Title.ToLower() == title
+                                           where b.BookTitle().Equals(title, StringComparison.CurrentCultureIgnoreCase)
                                            select b;
                 //check if there is no book in the list with this title return appropriate message
                 if (booksFilteredByTitle.Count() != 0)
@@ -53,7 +56,7 @@
 
                 else
                 {
-                    Console.WriteLine("There is no book(s) in library with this title");
+                    Console.WriteLine($"There is no book(s) in library with this title: {title}");
                 }
             }
             else
@@ -63,6 +66,11 @@
 
 
 
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return books.GetEnumerator();
         }
 
     }

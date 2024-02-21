@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryManagementSystem;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -6,9 +7,9 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
-namespace LibraryManagemenetSystem
+namespace LibraryManagementSystem
 {
-    internal class UserConsoleUI
+    internal class UserConsoleUI : Validators
     {
         readonly BookManager consoleManagedBooks = new();
 
@@ -48,23 +49,7 @@ namespace LibraryManagemenetSystem
             }
 
         }
-        /// <summary>
-        /// Method is helper method where user is asked to enter intager value to continue process
-        /// </summary>
-        /// <returns>targetInt</returns>
-        public int ParseUserInputToInt()
-        {
-            var userInput = Console.ReadLine();
-            int targetInt = -99999999;
 
-            //Until user entered value is not integer, user will be in this loop. Exception is default value of variable -99999999
-            while (int.TryParse(userInput, out targetInt) == false || targetInt == -99999999)
-            {
-                Console.WriteLine($"Please enter valid input, you entered: <{userInput}>");
-                userInput = Console.ReadLine();
-            }
-            return targetInt;
-        }
         /// <summary>
         /// Method is responsible to ask user to add new book, confirm successful transaction and ask about next step.
         /// </summary>
@@ -74,25 +59,19 @@ namespace LibraryManagemenetSystem
             Console.WriteLine("Pease add new book by entering Title, Author and Publishing Year");
             string usrBookTitle = null;
             string usrBookAuthor = null;
-            int usrBookPublishingYear = -1;
+            int usrBookPublishingYear;
 
             //Capturing Title
             Console.Write("Title:\t");
-            usrBookTitle = Console.ReadLine();
+            usrBookTitle = ValidateUserInputOnEmptyString();
+
             //Capturing Author
             Console.Write("Author:\t");
-            usrBookAuthor = Console.ReadLine();
+            usrBookAuthor = ValidateUserInputOnEmptyString();
 
             //Capturing Year
             Console.Write("Year:\t");
-            var userInput = Console.ReadLine();
-
-            //Could use the method ParseUserInputToInt, but wanted to have specific message in while loop.
-            while (int.TryParse(userInput, out usrBookPublishingYear) == false || usrBookPublishingYear == -1)
-            {
-                Console.WriteLine($"Please enter valid year for book <{usrBookTitle}> written by <{usrBookAuthor}>, you entered: <{userInput}>");
-                userInput = Console.ReadLine();
-            }
+            usrBookPublishingYear = ParseUserInputToInt();
 
             //create book based on user inputs
             consoleManagedBooks.CreateBook(usrBookTitle, usrBookAuthor, usrBookPublishingYear);
@@ -133,7 +112,7 @@ namespace LibraryManagemenetSystem
             Console.WriteLine("Please enter the title of the book(s) to see it's details:");
             //convert user inputted info to lower
             var usrSearchedTitle = Console.ReadLine().ToLower();
-            
+
             //invoking and passing user inputted title value to BookManager
             consoleManagedBooks.SearchBookByTitle(usrSearchedTitle);
 
