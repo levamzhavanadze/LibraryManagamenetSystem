@@ -1,9 +1,9 @@
-﻿namespace LibraryManagamenetSystem
+﻿namespace LibraryManagemenetSystem
 {
     internal class Book
     {
         public int Id { get; set; }
-        //helper Id to generate incrimental ID
+        //helper Id to generate incremental ID
         static int tempId;
         public string Title { get; set; }
 

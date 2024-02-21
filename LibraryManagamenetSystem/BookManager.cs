@@ -1,7 +1,7 @@
-﻿namespace LibraryManagamenetSystem
+﻿namespace LibraryManagemenetSystem
 {
     /// <summary>
-    /// This lass is responsible to manage books 
+    /// This class is responsible to manage books 
     /// </summary>
     internal class BookManager
     {
@@ -10,14 +10,17 @@
         //ახალი წიგნის დამატება სიაში
         public void CreateBook(string bookTitle, string bookAuthor, int publishingYear)
         {
+            //adding books in the list
             books.Add(new Book(bookTitle, bookAuthor, publishingYear));
         }
 
         //ყველა წიგნის სიის ჩვენება.
         public void GetAllBooks()
         {
+            //checks if there is no books in the list prints corresponding message
             if (books.Count() != 0)
             {
+                //Print all book details
                 foreach (var book in books)
                 {
                     book.BookDetails();
@@ -32,11 +35,14 @@
         //წიგნის ძებნა მისი სათაურის მიხედვით.
         public void SearchBookByTitle(string title)
         {
+            //checks if there is no books in the list prints corresponding message
             if (books.Count() != 0)
             {
+                //generate temp list matched with passed title
                 var booksFilteredByTitle = from b in books
                                            where b.Title.ToLower() == title
                                            select b;
+                //check if there is no book in the list with this title return appropriate message
                 if (booksFilteredByTitle.Count() != 0)
                 {
                     foreach (var i in booksFilteredByTitle)
