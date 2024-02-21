@@ -16,23 +16,47 @@
         //ყველა წიგნის სიის ჩვენება.
         public void GetAllBooks()
         {
-            foreach (var book in books)
+            if (books.Count() != 0)
             {
-                book.BookDetails();
+                foreach (var book in books)
+                {
+                    book.BookDetails();
+                }
+            }
+            else
+            {
+                Console.WriteLine("There are no books in library yet, please add new one from main menu");
             }
         }
 
         //წიგნის ძებნა მისი სათაურის მიხედვით.
         public void SearchBookByTitle(string title)
         {
-            var bookByTitle = from b in books
-                              where b.Title == title
-                              select b;
-
-            foreach (var i in bookByTitle)
+            if (books.Count() != 0)
             {
-                Console.WriteLine(i);
+                var booksFilteredByTitle = from b in books
+                                           where b.Title.ToLower() == title
+                                           select b;
+                if (booksFilteredByTitle.Count() != 0)
+                {
+                    foreach (var i in booksFilteredByTitle)
+                    {
+                        Console.WriteLine(i);
+                    }
+                }
+
+                else
+                {
+                    Console.WriteLine("There is no book(s) in library with this title");
+                }
             }
+            else
+            {
+                Console.WriteLine("There are no books in library yet, please add new one from main menu");
+            }
+
+
+
         }
 
     }
