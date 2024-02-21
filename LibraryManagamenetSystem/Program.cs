@@ -1,17 +1,29 @@
 ﻿using LibraryManagamenetSystem;
 
-Book a = new() { Title = "wigni", Author = "levan", PublishingYear = new DateTime(2021, 1, 1) };
-Book b = new() { Title = "wigni2", Author = "levan2", PublishingYear = new DateTime(2022, 2, 2) };
-Book c = new() { Title = "wigni3", Author = "levan3", PublishingYear = new DateTime(2023, 3, 3) };
+using System.Runtime.InteropServices;
 
 
-Console.WriteLine(a);
-Console.WriteLine(b);
-Console.WriteLine(c);
 
-//coment
 
-Console.WriteLine("from TB");
+///Add Menu
 
-Console.WriteLine("some changes needs to be pushed.");
+Console.WriteLine("Hello, here you can manage books. Here are the options you can do");
+Console.WriteLine("\n 1 - add new book \n 2 - see all available books \n 3 - search book by title");
+
+UserInterface userInteractive = new UserInterface();
+int userInput = userInteractive.ParseUserInput();
+
+if (userInput == 1)
+{
+    userInteractive.AskUserToCreateBooks();
+
+}
+else if (userInput == 2)
+{
+    Console.WriteLine(2);
+}
+else if (userInput == 3)
+{
+    Console.WriteLine(3);
+}
 

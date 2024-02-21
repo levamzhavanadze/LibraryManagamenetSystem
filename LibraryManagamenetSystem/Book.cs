@@ -2,8 +2,9 @@
 {
     internal class Book
     {
-        static int Id { get; set; }
-
+        public int Id { get; set; }
+        //helper Id to generate incrimental ID
+        static int tempId;
         public string Title { get; set; }
 
         public string Author { get; set; }
@@ -11,23 +12,33 @@
         public DateTime PublishingYear { get; set; }
 
 
-        public Book()
+        public Book(string title, string author, int publishingYear)
         {
 
             Id = GenerateId();
+            Title = title;
+            Author = author;
+            PublishingYear = new DateTime(publishingYear, 1, 1);
 
         }
 
+        /// <summary>
+        /// Generates incremental Id for each instance of the book
+        /// </summary>
+        /// <returns>tempId</returns>
         internal int GenerateId()
         {
-            int tempId = Id;
-
-            Id = tempId;
             tempId++;
-
             return tempId;
         }
 
+        /// <summary>
+        /// Prints the details of the book
+        /// </summary>
+        public void BookDetails()
+        {
+            Console.WriteLine(ToString());
+        }
 
         public override string ToString()
         {
